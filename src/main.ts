@@ -13,6 +13,11 @@ import {GitHubHelper, ClientPayload} from './github-helper'
 
 async function run(): Promise<void> {
   try {
+    core.warning(`This action's default branch has been renamed to "main"`)
+    core.warning(
+      `Referencing this action with "@master" is deprecated and will stop working after June 30th 2021`
+    )
+
     // Check required context properties exist (satisfy type checking)
     if (
       !github.context.payload.action ||
