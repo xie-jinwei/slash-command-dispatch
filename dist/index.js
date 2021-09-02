@@ -348,7 +348,9 @@ class GitHubHelper {
             const slashCommand = clientPayload.slash_command;
             const ref = slashCommand.args.named.ref
                 ? slashCommand.args.named.ref
-                : yield this.getDefaultBranch(cmd.repository);
+                : clientPayload.pull_request['head']['ref']
+                    ? clientPayload.pull_request['head']['ref']
+                    : yield this.getDefaultBranch(cmd.repository);
             // Take max 10 named arguments, excluding 'ref'.
             const inputs = {};
             let count = 0;
